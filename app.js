@@ -30,8 +30,8 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log('db has been re sync');
-// });
+db.sequelize.sync({ force: false }).then(() => {
+  console.log('db has been re sync');
+});
 
 module.exports = app;

@@ -11,7 +11,7 @@ const saveUser = async (req, res, next) => {
       },
     });
     if (userMobile) {
-      return res.json(409).send('User is already Exist');
+      return res.status(409).send({message: 'User is already Exist'});
     }
 
     next();

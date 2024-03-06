@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const db = require('./../models');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const db = require("./../models");
 const User = db.users;
 
 const signup = async (req, res) => {
@@ -23,14 +23,16 @@ const signup = async (req, res) => {
       delete user.createdAt;
       delete user.updatedAt;
       return res.status(201).send({
-        message: 'User Created Successfully..!!',
+        message: "User Created Successfully..!!",
         token: token,
         user: user,
       });
     } else {
-      res.status(409).send({ error_msg: 'Details are not correct' });
+      res.status(409).send({ error_msg: "Details are not correct" });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.send({ Error: error });
+  }
 };
 
 const login = async (req, res) => {
@@ -51,14 +53,14 @@ const login = async (req, res) => {
         });
 
         return res.status(201).send({
-          message: 'User Login Successfully..!!',
+          message: "User Login Successfully..!!",
           token: token,
         });
       } else {
-        res.status(401).send({ error_msg: 'Authentication Failed' });
+        res.status(401).send({ error_msg: "Authentication Failed" });
       }
     } else {
-      res.status(401).send({ error_msg: 'Authentication Failed' });
+      res.status(401).send({ error_msg: "Authentication Failed" });
     }
   } catch (error) {
     res.send({ Error: error });
