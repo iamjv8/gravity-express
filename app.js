@@ -30,7 +30,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log('db has been re sync');
 });
 

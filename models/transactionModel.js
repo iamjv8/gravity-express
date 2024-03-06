@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define(
-    'transaction',
+    "transaction",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       type: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
