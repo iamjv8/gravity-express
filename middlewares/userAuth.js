@@ -1,4 +1,3 @@
-const express = require('express');
 const db = require('./../models');
 
 const User = db.users;
@@ -11,7 +10,7 @@ const saveUser = async (req, res, next) => {
       },
     });
     if (userMobile) {
-      return res.status(409).send({message: 'User is already Exist'});
+      return res.status(409).send({ message: 'User is already Exist' });
     }
 
     next();
