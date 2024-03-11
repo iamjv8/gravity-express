@@ -1,28 +1,28 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const { saveUser } = require('./../middlewares/userAuth');
-const { signup, login } = require('./../controllers/userController');
-const { addType, getTypes } = require('./../controllers/typeController');
+const { saveUser } = require("./../middlewares/userAuth");
+const { signup, login } = require("./../controllers/userController");
+const { addType, getTypes } = require("./../controllers/typeController");
 const {
   getCategories,
   addCategory,
-} = require('../controllers/categoryController');
+} = require("../controllers/categoryController");
 const {
   getTransactions,
   addTransaction,
-} = require('../controllers/transactionController');
-const { checkToken } = require('../middlewares/checkToken');
+} = require("../controllers/transactionController");
+const { checkToken } = require("../middlewares/checkToken");
 
-router.post('/signup', saveUser, signup);
-router.post('/login', login);
+router.post("/signup", saveUser, signup);
+router.post("/login", login);
 
-router.get('/type', checkToken, getTypes);
-router.post('/type', addType);
+router.get("/type", checkToken, getTypes);
+router.post("/type", checkToken, addType);
 
-router.get('/category', getCategories);
-router.post('/category', addCategory);
+router.get("/category", checkToken, getCategories);
+router.post("/category", checkToken, addCategory);
 
-router.post('/getTransaction', getTransactions);
-router.post('/addTransaction', addTransaction);
+router.post("/getTransaction", checkToken, getTransactions);
+router.post("/addTransaction", checkToken, addTransaction);
 
 module.exports = router;
