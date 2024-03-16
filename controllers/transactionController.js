@@ -4,7 +4,7 @@ const Transaction = db.transaction;
 const getTransactions = async (req, res) => {
   try {
     const { user_id } = req.body;
-    const transactions = await Transaction.findOne({
+    const transactions = await Transaction.findAll({
       where: {
         user_id: user_id,
       },
@@ -24,12 +24,13 @@ const getTransactions = async (req, res) => {
 
 const addTransaction = async (req, res) => {
   try {
-    const { description, amount, category, type, user_id } = req.body;
+    const { description, amount, category, date, type, user_id } = req.body;
 
     const newTransaction = await Transaction.create({
       description: description,
       amount: amount,
       type: type,
+      date: date,
       category: category,
       user_id: user_id,
     });

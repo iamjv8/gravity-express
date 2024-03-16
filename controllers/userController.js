@@ -55,6 +55,7 @@ const login = async (req, res) => {
         return res.status(201).send({
           message: "User Login Successfully..!!",
           token: token,
+          user_id: user.id,
         });
       } else {
         res.status(401).send({ error_msg: "Authentication Failed" });
