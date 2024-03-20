@@ -37,7 +37,7 @@ const addTransaction = async (req, res) => {
     if (newTransaction) {
       return res.status(201).send({
         message: "Transaction added Successfully..!!",
-        category: newTransaction,
+        data: newTransaction,
       });
     } else {
       res.status(409).send({ error_msg: "Details are not correct" });

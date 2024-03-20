@@ -1,16 +1,16 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING, {
-  dialect: 'postgres',
+  dialect: "postgres",
 });
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Database Connected Successfully');
+    console.log("Database Connected Successfully");
   })
   .catch((err) => {
-    console.log('Error in connection: ', err);
+    console.log("Error in connection: ", err);
   });
 
 const db = {};
@@ -18,10 +18,10 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //connecting to model
-db.users = require('./userModel')(sequelize, DataTypes);
-db.type = require('./typeModel')(sequelize, DataTypes);
-db.category = require('./categoryModel')(sequelize, DataTypes);
-db.transaction = require('./transactionModel')(sequelize, DataTypes);
+db.users = require("./userModel")(sequelize, DataTypes);
+db.type = require("./typeModel")(sequelize, DataTypes);
+db.category = require("./categoryModel")(sequelize, DataTypes);
+db.transaction = require("./transactionModel")(sequelize, DataTypes);
 
 //exporting the module
 module.exports = db;
