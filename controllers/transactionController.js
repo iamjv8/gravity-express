@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+
 const db = require("./../models");
 const Transaction = db.transaction;
 
@@ -7,6 +9,18 @@ const getTransactions = async (req, res) => {
     const transactions = await Transaction.findAll({
       where: {
         user_id: user_id,
+      },
+      // attributes: {
+      //   include: [
+      //     [db.sequelize.col(db.category.category_name), "categoryName"],
+      //   ],
+      // },
+      include: {
+        model: db.category,
+        as: "category",
+        where: {
+          state: Sequelize.col("category_name"),
+        },
       },
     });
 
@@ -24,14 +38,14 @@ const getTransactions = async (req, res) => {
 
 const addTransaction = async (req, res) => {
   try {
-    const { description, amount, category, date, type, user_id } = req.body;
+    const { description, amount, category_id, date, type, user_id } = req.body;
 
     const newTransaction = await Transaction.create({
       description: description,
       amount: amount,
       type: type,
       date: date,
-      category: category,
+      category_id: category_id,
       user_id: user_id,
     });
     if (newTransaction) {
