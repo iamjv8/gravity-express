@@ -1,5 +1,3 @@
-const { Sequelize } = require("sequelize");
-
 const db = require("./../models");
 const Transaction = db.transaction;
 
@@ -10,29 +8,26 @@ const getTransactions = async (req, res) => {
       where: {
         user_id: user_id,
       },
-      // attributes: {
-      //   include: [
-      //     [db.sequelize.col(db.category.category_name), "categoryName"],
-      //   ],
-      // },
       include: {
         model: db.category,
         as: "category",
-        where: {
-          state: Sequelize.col("category_name"),
-        },
+        attributes: ["category_name"],
       },
     });
-
-    if (transactions) {
-      return res.status(200).send(transactions);
+    const transactionsData = transactions.map((element) => {
+      element.dataValues.category = element.category.category_name;
+      delete element.dataValues.category_id;
+      return element;
+    });
+    if (transactionsData) {
+      return res.status(200).send(transactionsData);
     } else {
       res
         .status(409)
         .send({ error_msg: "There is no transactions available." });
     }
   } catch (error) {
-    res.send({ Error: error });
+    return res.send({ Error: error });
   }
 };
 

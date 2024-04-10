@@ -11,6 +11,7 @@ const {
   getTransactions,
   addTransaction,
 } = require("../controllers/transactionController");
+const { getDashboardStatistics } = require("../controllers/reportsController");
 const { checkToken } = require("../middlewares/checkToken");
 
 router.post("/signup", saveUser, signup);
@@ -24,5 +25,7 @@ router.post("/category", checkToken, addCategory);
 
 router.post("/getTransaction", checkToken, getTransactions);
 router.post("/addTransaction", checkToken, addTransaction);
+
+router.post("/dashboardStatistics", checkToken, getDashboardStatistics);
 
 module.exports = router;
