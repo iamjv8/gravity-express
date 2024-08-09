@@ -14,6 +14,10 @@ const {
 const { getDashboardStatistics } = require("../controllers/reportsController");
 const { checkToken } = require("../middlewares/checkToken");
 
+router.get("/hello", (req, res) =>
+  res.status(200).send({ message: "Welcome to Gravity" })
+);
+
 router.post("/signup", saveUser, signup);
 router.post("/login", login);
 
