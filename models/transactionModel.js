@@ -15,20 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      category_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       date: {
         type: DataTypes.DATE,
-        allowNull: false,
-      },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

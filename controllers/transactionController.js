@@ -6,16 +6,24 @@ const getTransactions = async (req, res) => {
     const { user_id } = req.body;
     const transactions = await Transaction.findAll({
       where: {
-        user_id: user_id,
+        userId: user_id,
       },
-      include: {
-        model: db.category,
-        as: "category",
-        attributes: ["category_name"],
-      },
+      include: [
+        {
+          model: db.category,
+          as: "category",
+          attributes: ["category_name"],
+        },
+        {
+          model: db.type,
+          as: "type",
+          attributes: ["type_name"],
+        },
+      ],
     });
     const transactionsData = transactions.map((element) => {
       element.dataValues.category = element.category.category_name;
+      element.dataValues.type = element.type.type_name;
       delete element.dataValues.category_id;
       return element;
     });
@@ -33,15 +41,16 @@ const getTransactions = async (req, res) => {
 
 const addTransaction = async (req, res) => {
   try {
-    const { description, amount, category_id, date, type, user_id } = req.body;
+    const { description, amount, category_id, date, type_id, user_id } =
+      req.body;
 
     const newTransaction = await Transaction.create({
       description: description,
       amount: amount,
-      type: type,
+      typeId: type_id,
       date: date,
-      category_id: category_id,
-      user_id: user_id,
+      categoryId: category_id,
+      userId: user_id,
     });
     if (newTransaction) {
       return res.status(201).send({

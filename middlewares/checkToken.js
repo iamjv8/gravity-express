@@ -9,8 +9,8 @@ const checkToken = async (req, res, next) => {
     req.userId = userData.id;
     next();
   } catch (error) {
-    return res.status(403).send({ message: "Token is expired" });
     console.error(error);
+    return res.status(403).send({ message: "Token is expired" });
   }
 };
 

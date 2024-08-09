@@ -20,7 +20,7 @@ const addType = async (req, res) => {
     const { type } = req.body;
     const existingType = await Type.findOne({
       where: {
-        type: type,
+        type_name: type,
       },
     });
 
@@ -28,7 +28,7 @@ const addType = async (req, res) => {
       return res.status(409).send({ message: "Type is already Exist" });
     }
 
-    const newType = await Type.create({ type: type });
+    const newType = await Type.create({ type_name: type });
     if (newType) {
       return res.status(201).send({
         message: "Type Created Successfully..!!",

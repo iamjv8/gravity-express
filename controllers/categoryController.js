@@ -30,7 +30,7 @@ const addCategory = async (req, res) => {
 
     const newCategory = await Category.create({
       category_name: category_name,
-      type: type,
+      typeId: type,
       icon: icon,
     });
     if (newCategory) {

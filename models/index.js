@@ -23,11 +23,14 @@ db.type = require("./typeModel")(sequelize, DataTypes);
 db.category = require("./categoryModel")(sequelize, DataTypes);
 db.transaction = require("./transactionModel")(sequelize, DataTypes);
 
-db.category.hasMany(db.transaction, {
-  foreignKey: "id",
-  as: "category",
-});
-db.transaction.belongsTo(db.category, { as: "category", foreignKey: "id" });
+db.category.hasMany(db.transaction);
+db.transaction.belongsTo(db.category);
+
+db.type.hasMany(db.transaction);
+db.transaction.belongsTo(db.type);
+
+db.users.hasMany(db.transaction);
+db.transaction.belongsTo(db.users);
 
 //exporting the module
 module.exports = db;
